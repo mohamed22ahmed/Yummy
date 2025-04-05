@@ -1,0 +1,164 @@
+
+html {
+font-family: 'Open Sans', sans-serif;
+scroll-behavior: smooth;
+}
+
+body {
+font-family: 'Open Sans', sans-serif;
+font-size:14px;
+}
+
+.border{
+    border: 1px solid red !important;
+}
+
+.font-12{
+    font-size: 12px;
+}
+.font-13{
+    font-size: 13px;
+}
+.font-14{
+    font-size: 14px;
+}
+
+.line-normal{
+    line-height: normal !important;
+}
+
+.q-timeline__title{
+    font-size: 13px !important;
+    margin-bottom:0 !important;    
+    font-weight: 700 !important;
+}
+
+.q-timeline--comfortable--right .q-timeline__subtitle{
+    padding-right: 10px !important;
+}
+
+.q-timeline--comfortable--right .q-timeline__content{
+    padding-left: 0 !important;
+}
+
+.q-timeline__dot::before{
+   height: 10px !important;
+   width: 10px !important;
+}
+.q-timeline__dot::after {
+    left: 3px !important;
+}
+
+.q-timeline--dense--right .q-timeline__entry{
+    padding-left: 20px !important;
+}
+
+.q-timeline{
+    margin: 0 !important;    
+}
+
+.q-timeline__entry{
+    line-height:normal !important;
+}
+
+.q-timeline__content{
+    padding-bottom:10px !important;
+}
+
+.q-timeline__entry:last-child .q-timeline__content{
+    padding-bottom:0 !important;
+}
+
+.q-dialog .fixed-bottom{
+    bottom: 20px !important;
+}
+
+.b_radius15{
+    border-radius:15px !important;
+}
+
+.text-h6{
+    font-size: 18px;
+}
+
+.q-card-light,
+.q-dialog__inner > div,
+.q-table__card
+{
+    box-shadow:0 0 2px 2px rgba(0,0,0,.03) !important;
+}
+
+.text-brandgreen {
+color: #3ecf8e !important;
+}
+.bg-brandgreen {
+background: #3ecf8e !important;
+}
+
+.max-50{
+    max-width: 50px !important;
+}
+
+.max-100{
+    max-width: 100px;
+}
+.max-110{
+    max-width: 110px;
+}
+.max-120{
+    max-width: 120px;
+}
+.max-130{
+    max-width: 130px;
+}
+
+.map{
+
+}
+.map.small{    
+    min-height: 300px;
+}
+
+.card-bordered {
+border-top: 2px solid #fafafa;
+border-bottom: 2px solid #fafafa;
+}
+.border-top {
+border-top: 2px solid #fafafa;
+}
+.border-bottom {
+border-bottom: 2px solid #fafafa;
+}
+
+.marker_icon_merchant,
+.marker_icon_destination,
+.marker_icon_driver
+ {  
+  background-size: cover;
+  background-color: #f44336;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer; 
+}
+.marker_icon_merchant{
+    background-image:url("../images/restaurant.svg");    
+    background-color: #1976d2 !important;
+}
+.marker_icon_destination{
+  background-image:url("../images/home.svg");  
+  background-color: #00c853 !important;
+}
+.marker_icon_driver{
+    background-image:url("../images/bicycle.svg");  
+}
+.yandex_popup{
+  border: 1px solid #ccc;
+  background: #fff;  
+  position: absolute;
+  top: -27px;
+  left: 15px;
+  padding: 3px;
+  border-radius: 5px;
+  font-size: 12px;
+}

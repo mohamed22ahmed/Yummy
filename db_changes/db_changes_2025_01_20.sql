@@ -1,0 +1,2 @@
+ALTER TABLE st_ordernew
+    ADD COLUMN `from` VARCHAR(50) NOT NULL;

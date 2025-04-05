@@ -1,0 +1,1 @@
+import{b7 as t,X as a}from"./index.57d98e6b.js";const r=t("deliveryOverview",{state:()=>({data:[],loading:!1}),getters:{doubleCount(e){return e.counter*2}},actions:{deliveriesOverview(){this.loading=!0,a.fetchDataByTokenPost("deliveriesOverview").then(e=>{this.data=e.details}).catch(e=>{this.data=[]}).then(e=>{this.loading=!1})},clearData(){this.data=[]}}});export{r as D};

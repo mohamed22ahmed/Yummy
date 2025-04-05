@@ -1,0 +1,7 @@
+ALTER TABLE st_merchant
+    ADD COLUMN ar_restaurant_name varchar(255) AFTER `restaurant_name`;
+
+
+
+ALTER TABLE st_merchant
+    MODIFY COLUMN `type` ENUM('RESTAURANT', 'SUPERMARKET', 'HOME_COOKING', 'CHAIN', 'SUPERMARKET_CHAIN', 'CHILD', 'STORE_CHAIN', 'STORE') DEFAULT 'RESTAURANT';

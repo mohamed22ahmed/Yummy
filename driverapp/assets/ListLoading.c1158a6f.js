@@ -1,0 +1,1 @@
+import{_ as e,q as t,Z as s,f as a,V as r}from"./index.57d98e6b.js";const n={name:"ListLoading",setup(){return{}}},o={class:"flex flex-center full-width q-pa-xl",style:{"min-height":"calc(30vh)"}};function c(i,l,p,_,d,f){return t(),s("div",o,[a(r,{color:"primary",size:"2em"})])}var u=e(n,[["render",c]]);export{u as default};

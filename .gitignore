@@ -1,0 +1,21 @@
+# Ignore specific file
+/k-config.php
+k-config-prod.php
+
+# Ignore .htaccess file
+.htaccess
+
+# Ignore directories
+upload/
+up2/
+
+# Ignore specific directories and files
+/.idea
+/.qodo
+/.vscode
+/protected/runtime
+/backoffice/protected/runtime
+
+# Ignore other specific files
+.qodo
+log.log

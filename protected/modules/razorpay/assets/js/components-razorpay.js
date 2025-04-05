@@ -1,0 +1,39 @@
+const componentsRazorpay={props:["title","label","payment_code","merchant_id","merchant_type","key_id","amount","currency_code","ajax_url","cart_uuid","on_error"],data(){return{is_loading:false,error:[],order_uuid:"",success:"",customer_id:"",doing_something:"",rzr_order_id:"",orders:[],button_enabled:true,jwt_data:[],force_amount:0,force_currency:""}},mounted(){},updated(){},methods:{showPaymentForm(){this.error=[];$("#razorpayForm").modal("show");if(empty(this.key_id)){this.button_enabled=false}else this.CreateCustomer()},close(){$("#razorpayForm").modal("hide")},closePayment(){this.$emit("afterCancelPayment")},CreateCustomer(){var e=this.ajax_url;var t={YII_CSRF_TOKEN:$("meta[name=YII_CSRF_TOKEN]").attr("content"),cart_uuid:this.cart_uuid,payment_code:this.payment_code,merchant_id:this.merchant_id,merchant_type:this.merchant_type};var a=1;t=JSON.stringify(t);ajax_request_cmp[a]=$.ajax({url:e+"/CreateCustomer",method:"PUT",dataType:"json",data:t,contentType:$content_type.json,timeout:$timeout_cmp,crossDomain:true,beforeSend:e=>{this.is_loading=true;this.error=[];if(ajax_request_cmp[a]!=null){ajax_request_cmp[a].abort()}}}).done(e=>{if(e.code==1){this.customer_id=e.details.customer_id;this.button_enabled=true}else{this.customer_id="";this.error=e.msg;this.button_enabled=false}}).always(e=>{this.is_loading=false})},initRazorPay(){if(window.paypal==null){new Promise(e=>{const t=window.document;const a="razorpay-script";const r=t.createElement("script");r.id=a;r.setAttribute("src","https://checkout.razorpay.com/v1/checkout.js");t.head.appendChild(r);r.onload=()=>{e()}}).then(()=>{this.initPayment()})}else{this.initPayment()}},submitForms(){var e={YII_CSRF_TOKEN:$("meta[name=YII_CSRF_TOKEN]").attr("content"),payment_code:this.payment_code,merchant_id:this.merchant_id};var t=1;e=JSON.stringify(e);ajax_request_cmp[t]=$.ajax({url:ajaxurl+"/SavedPaymentProvider",method:"PUT",dataType:"json",data:e,contentType:$content_type.json,timeout:$timeout_cmp,crossDomain:true,beforeSend:e=>{this.is_loading=true;this.error=[];this.doing_something="";if(ajax_request_cmp[t]!=null){ajax_request_cmp[t].abort()}}}).done(e=>{if(e.code==1){this.error=[];this.close();this.$emit("setPaymentlist")}else{this.error=e.msg}}).always(e=>{this.is_loading=false})},PaymentRender(e){this.order_uuid=e.order_uuid;var t=this.ajax_url;var a={YII_CSRF_TOKEN:$("meta[name=YII_CSRF_TOKEN]").attr("content"),cart_uuid:this.cart_uuid,order_uuid:this.order_uuid,payment_code:this.payment_code,merchant_id:this.merchant_id,merchant_type:this.merchant_type};var r=1;a=JSON.stringify(a);ajax_request_cmp[r]=$.ajax({url:t+"/CreateOrder",method:"PUT",dataType:"json",data:a,contentType:$content_type.json,timeout:$timeout_cmp,crossDomain:true,beforeSend:e=>{this.error=[];this.$emit("showLoader",this.label.getting_payment);if(ajax_request_cmp[r]!=null){ajax_request_cmp[r].abort()}}}).done(e=>{if(e.code==1){this.orders=e.details;this.initRazorPay()}else{this.$emit("afterCancelPayment");this.$emit("alert",e.msg)}}).always(e=>{this.$emit("closeLoader")})},initPayment(){try{var e={key:this.key_id,amount:this.orders.amount,currency:this.orders.currency,name:this.orders.name,description:this.orders.description,order_id:this.orders.order_id,customer_id:this.orders.customer_id,handler:e=>{this.verifyPayment(e)},theme:{color:"#3399cc"},modal:{ondismiss:e=>{this.closePayment()}}};var t=new Razorpay(e);t.on("payment.failed",e=>{});this.$emit("closeLoader");t.open()}catch(a){this.$emit("afterCancelPayment");this.$emit("alert",a.message)}},verifyPayment(e){var t=this.ajax_url;var a={YII_CSRF_TOKEN:$("meta[name=YII_CSRF_TOKEN]").attr("content"),cart_uuid:this.cart_uuid,order_uuid:this.order_uuid,payment_code:this.payment_code,merchant_id:this.merchant_id,merchant_type:this.merchant_type,razorpay_payment_id:e.razorpay_payment_id,razorpay_order_id:e.razorpay_order_id,razorpay_signature:e.razorpay_signature};var r=1;a=JSON.stringify(a);ajax_request_cmp[r]=$.ajax({url:t+"/verifyPayment",method:"PUT",dataType:"json",data:a,contentType:$content_type.json,timeout:$timeout_cmp,crossDomain:true,beforeSend:e=>{this.is_loading=true;this.error=[];this.$emit("showLoader",this.label.processing_payment);if(ajax_request_cmp[r]!=null){ajax_request_cmp[r].abort()}}}).done(e=>{if(e.code==1){window.location.href=e.details.redirect}else{this.$emit("afterCancelPayment");this.$emit("alert",e.msg)}}).always(e=>{this.$emit("closeLoader")})},Dopayment(t,e){this.jwt_data=t;this.force_amount=e.amount;this.force_currency=e.currency_code;this.$emit("showLoader");var a={YII_CSRF_TOKEN:$("meta[name=YII_CSRF_TOKEN]").attr("content"),data:t};axios({method:"PUT",url:this.ajax_url+"/createneworder",data:a,timeout:$timeout_cmp}).then(e=>{if(e.data.code==1){this.orders=e.data.details;this.RazorPayinit()}else{this.$emit("afterCancelPayment");this.$emit("alert",t.msg)}})["catch"](e=>{}).then(e=>{this.$emit("closeLoader")})},RazorPayinit(){if(window.paypal==null){new Promise(e=>{const t=window.document;const a="razorpay-script";const r=t.createElement("script");r.id=a;r.setAttribute("src","https://checkout.razorpay.com/v1/checkout.js");t.head.appendChild(r);r.onload=()=>{e()}}).then(()=>{this.Paymentinit()})}else{this.Paymentinit()}},Paymentinit(){try{var e={key:this.key_id,amount:this.orders.amount,currency:this.orders.currency,name:this.orders.name,description:this.orders.description,order_id:this.orders.order_id,customer_id:this.orders.customer_id,handler:e=>{this.processPayment(e)},theme:{color:"#3399cc"},modal:{ondismiss:e=>{this.closePayment()}}};var t=new Razorpay(e);t.on("payment.failed",e=>{});this.$emit("closeLoader");t.open()}catch(a){this.$emit("afterCancelPayment");this.$emit("alert",a.message)}},processPayment(e){this.$emit("showLoader");var t={YII_CSRF_TOKEN:$("meta[name=YII_CSRF_TOKEN]").attr("content"),data:this.jwt_data,razorpay_payment_id:e.razorpay_payment_id,razorpay_order_id:e.razorpay_order_id,razorpay_signature:e.razorpay_signature};axios({method:"PUT",url:this.ajax_url+"/processpayment",data:t,timeout:$timeout_cmp}).then(e=>{if(e.data.code==1){this.$emit("afterSuccessfulpayment",e.data.details)}else{this.$emit("afterCancelPayment",e.data.msg)}})["catch"](e=>{}).then(e=>{this.$emit("closeLoader")})}},template:`		        	 
+	 <div class="modal" id="razorpayForm" tabindex="-1" role="dialog" aria-labelledby="razorpayForm" aria-hidden="true">
+	   <div class="modal-dialog" role="document">
+	     <div class="modal-content">
+	       <div class="modal-body">
+	       
+	         <a href="javascript:;" @click="close" 
+	          class="btn btn-black btn-circle rounded-pill"><i class="zmdi zmdi-close font20"></i></a> 
+	        
+	         <h4 class="m-0 mb-3 mt-3">{{title}}</h4>  	
+	         	         
+	         <p>{{label.notes}}</p>	 	       	         
+	         	         
+	         
+			 <DIV v-if="is_loading">
+			  <div class="loading mt-5">      
+			    <div class="m-auto circle-loader" data-loader="circle-side"></div>
+			  </div>
+			  <p class="text-center mt-1">{{doing_something}}</p>
+			 </DIV>  
+			
+	          <div v-cloak v-if="error.length>0" class="alert alert-warning mb-2" role="alert">
+			    <p v-cloak v-for="err in error" class="m-0">{{err}}</p>	    
+			  </div>    
+	         
+	       </div> <!--modal body-->	  
+	       
+	       <div class="modal-footer justify-content-start">	        
+		       <button class="btn btn-green w-100" @click="submitForms" :disabled="!button_enabled" 
+		       :class="{ loading: is_loading }"   >
+		          <span class="label">{{label.submit}}</span>
+		          <div class="m-auto circle-loader" data-loader="circle-side"></div>
+		      </button>		      
+		   </div> <!--footer-->
+	            
+	  </div> <!--content-->
+	  </div> <!--dialog-->
+	</div> <!--modal-->      	 		
+	`};

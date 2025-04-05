@@ -1,0 +1,1 @@
+import{b7 as t}from"./index.57d98e6b.js";const a=t("location",{state:()=>({coordinates:[],has_watcher:!1,watchers:[]}),getters:{hasData(){return Object.keys(this.coordinates).length>0}},actions:{hadData(){return Object.keys(this.coordinates).length>0}}});export{a as u};

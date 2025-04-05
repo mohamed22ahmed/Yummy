@@ -1,0 +1,1 @@
+import{_ as e,n as t,a0 as a,d as s,U as r}from"./index.f6661a24.js";const n={name:"ListLoading",setup(){return{}}},o={class:"flex flex-center full-width q-pa-xl",style:{"min-height":"calc(30vh)"}};function c(i,l,p,d,_,f){return t(),a("div",o,[s(r,{color:"primary",size:"2em"})])}var u=e(n,[["render",c]]);export{u as default};

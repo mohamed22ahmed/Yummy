@@ -1,0 +1,1 @@
+import{k as s}from"./index.f6661a24.js";const a=s("search",{state:()=>({counter:0,data:[],status:[],is_submit:!1}),persist:!0,getters:{hasData(t){return Object.keys(t.data).length>0}},actions:{clearData(){this.data=[],this.status=[],this.is_submit=!1}}});export{a as u};
