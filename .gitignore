@@ -1,5 +1,4 @@
 # Ignore specific file
-/k-config.php
 k-config-prod.php
 
 # Ignore .htaccess file
